@@ -1,0 +1,62 @@
+.post-creator-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    width: 100%;
+
+    gap: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+.post-creator-container .profile-picture {
+    width: 46.8px;
+    height: 46.8px;
+}
+
+form {
+    grid-column: 2;
+
+    display: grid;
+    width: 100%;
+    gap: 10px;
+}
+
+.post-creator-button {
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: start;
+
+    width: 100%;
+
+    resize: none;
+    overflow-y: hidden;
+}
+
+.post-creator-button:focus {
+    outline: none;
+    border-color: #858585;
+}
+
+.post-creator-submit {
+    background-color: #3ac0ff;
+    padding: 10px 16px;
+
+    border-radius: 30px;
+    border: none;
+
+    cursor: pointer;
+
+    grid-row: 2;
+}
+
+@media screen and (max-width: 555px) {
+    .post-creator-container {
+        display: none;
+    }
+}

@@ -1,0 +1,42 @@
+.post .post-settings-container {
+    grid-column: 2;
+    justify-self: end;
+    position: relative;
+}
+
+.post .post-settings-button {
+    color: #5e5e5e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.post .post-settings-button:hover {
+    background-color: #ddd;
+}
+
+.post .post-settings-options-container {
+    position: absolute;
+    right: 0;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.post-settings-options-container .post-settings-option {
+    padding: 8px 14px;
+    background-color: #dee6e6;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.post-settings-options-container .post-settings-option:hover {
+    background-color: #fff;
+}

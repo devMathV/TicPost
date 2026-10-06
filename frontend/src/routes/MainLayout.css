@@ -1,0 +1,69 @@
+:root {
+    --mobile-nav-height: 80px;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr clamp(220px, 20vw, 300px) clamp(470px, 46vw, 700px) 1fr;
+    gap: 25px;
+    padding: 0 10px;
+}
+
+nav {
+    grid-column: 2;
+    z-index: 2;
+}
+
+main {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    grid-column: 3;
+
+    z-index: 1;
+}
+
+.load-posts:disabled {
+    color: #00000075;
+    cursor: not-allowed;
+}
+
+.load-posts:disabled:hover {
+    background-color: #eee;
+}
+
+@media screen and (max-width: 760px) {
+    .main-layout {
+        grid-template-columns: auto auto;
+        grid-template-rows: 1fr auto;
+        gap: 10px;
+    }
+
+    .nav-home {
+        grid-column: 1;
+    }
+
+    main {
+        grid-column: 2;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+        justify-content: center;
+        gap: 0;
+        height: 100vh;
+        position: relative;
+    }
+
+    main {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .nav-home {
+        grid-column: 1;
+        grid-row: 2;
+    }
+}

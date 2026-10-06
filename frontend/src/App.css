@@ -1,0 +1,35 @@
+.app {
+    width: 100%;
+}
+
+.background-box {
+    background-color: #fff;
+    box-shadow: 0 5px 10px #eee;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+
+.load-posts {
+    margin: 10px auto;
+    padding: 18px 26px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    background-color: #eee;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+
+    cursor: pointer;
+
+    transition: background-color .3s;
+}
+
+.load-posts:hover {
+    background-color: #fff;
+}

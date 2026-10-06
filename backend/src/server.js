@@ -62,4 +62,6 @@ app.put('/posts/:id', authMiddleware, updatePost);
 app.delete('/posts/:id', authMiddleware, deletePost);
 
 // Inicia a API
-app.listen(PORT, () => console.log(`O servidor está rodando na porta: ${PORT}`));
+app.listen(PORT, "0.0.0.0", () => 
+    console.log(`O servidor está rodando na porta: ${PORT}`)
+);

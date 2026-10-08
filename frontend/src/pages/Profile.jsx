@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 // Componentes
 import ProfileUserInfo from '../components/profile/ProfileUserInfo'
-import Post from "../components/Post/Post"
+import Post from '../components/post/Post'
 import EmptyPosts from '../components/ui/EmptyPosts'
 
 // Context

@@ -35,7 +35,7 @@ app.use(cookieParser())
 
 // Permite que o site acesse a API e receba os valores das credenciais (serve para os cookies)
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     credentials: true
 }));
 

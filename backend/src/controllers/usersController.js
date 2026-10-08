@@ -281,7 +281,7 @@ const login = async (req, res) => {
             httpOnly: true,
             // "NODE_ENV" é uma variável padrão do node, ela é alterada automaticamente quando vai para produção (production)
             secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 dias em milissegundos ( dia * hora * minuto * segundo * milissegundo)
         })
 

@@ -26,52 +26,57 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 // Context Provider
 import { SocialMediaContextProvider } from './context/SocialMediaContext.jsx'
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        {
+          index: true,
+          element: <Navigate to="/login" replace />,
+        },
+        {
+          element: <Auth />,
+          children: [
+            {
+              path: "login",
+              element: <Login />,
+            },
+            {
+              path: "signup",
+              element: <SignUp />,
+            },
+            {
+              path: "verify-email",
+              element: <VerifyEmail />,
+            },
+          ],
+        },
+        {
+          element: <MainLayout />,
+          children: [
+            {
+              path: "home",
+              element: <Home />,
+            },
+            {
+              path: "profile",
+              element: <Profile />,
+            },
+          ],
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/login" replace />,
-      },
-      {
-        element: <Auth />,
-        children: [
-          {
-            path: "login",
-            element: <Login />,
-          },
-          {
-            path: "signup",
-            element: <SignUp />,
-          },
-          {
-            path: "verify-email",
-            element: <VerifyEmail />,
-          },
-        ],
-      },
-      {
-        element: <MainLayout />,
-        children: [
-          {
-            path: "home",
-            element: <Home />,
-          },
-          {
-            path: "profile",
-            element: <Profile />,
-          },
-        ],
-      },
-      {
-        path: "*",
-        element: <NotFound />,
-      },
-    ],
-  },
-]);
+    basename: import.meta.env.PROD ? "/TicPost" : "/"
+  }
+);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

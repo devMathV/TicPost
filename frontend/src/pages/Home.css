@@ -1,0 +1,12 @@
+.home {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 500px) {
+    .home {
+        padding-bottom: var(--mobile-nav-height);
+    }
+}

@@ -1,0 +1,12 @@
+.empty-posts {
+    padding: 15px 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    text-align: center;
+}
+
+.empty-posts svg {
+    margin-top: 12px;
+    font-size: 56px;
+}

@@ -1,0 +1,33 @@
+.nav-not-found {
+    grid-column: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 5px 20px #0000000b;
+
+    .nav-logo {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        padding: 8px 12px;
+        gap: 10px;
+        cursor: pointer;
+
+        .logo {
+            height: 40px;
+        }
+
+        h2 {
+            font-weight: 400;
+        }
+    }
+
+    .nav-auth {
+        font-size: 18px;
+        padding: 16px 12px;
+        cursor: pointer;
+    }
+}

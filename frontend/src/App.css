@@ -1,0 +1,15 @@
+.app {
+    width: 100%;
+}
+
+.background-box {
+    background-color: #fff;
+    box-shadow: 0 5px 10px #eee;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}

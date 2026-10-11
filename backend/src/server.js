@@ -39,6 +39,9 @@ app.use(cors({
     credentials: true
 }));
 
+// Configuração que faz o proxy confiar no Render
+app.set('trust proxy', 1);
+
 // Porta da API
 const PORT = process.env.PORT;
 

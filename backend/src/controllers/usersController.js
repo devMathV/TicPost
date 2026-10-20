@@ -3,7 +3,7 @@ import prisma from '../lib/prisma.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from "crypto"
-import nodeMailer from '../services/nodemailer.js';
+import resend from '../services/resend.js';
 
 const getMe = async (req, res) => {
     try {
@@ -124,8 +124,8 @@ const register = async (req, res) => {
         }
 
         // Enviar código pro email
-        await nodeMailer.sendMail({
-            from: `"TicPost" <${process.env.GMAIL_USER}>`,
+        await resend.emails.send({
+            from: process.env.RESEND_FROM_EMAIL,
             to: email,
             subject: "Seu código de verificação",
             text: `Seu código de verificação é: ${code}\n\nEste código é válido por 10 minutos.`,

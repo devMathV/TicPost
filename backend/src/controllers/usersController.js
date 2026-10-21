@@ -139,28 +139,17 @@ const register = async (req, res) => {
         `
         })
 
-        // Teste
         if (resendError) {
-            console.error("Erro retornado pelo Resend:", {
-                name: resendError.name,
-                message: resendError.message
-            })
-
             return res.status(502).json({
                 errorMessage: "Não foi possível enviar o e-mail de verificação. Tente novamente."
             })
         }
-
-        console.log("E-mail aceito pelo Resend:", resendData?.id)
-        // Teste
 
         return res.status(201).json({
             successMessage: "Código de verificação enviado para o seu email.",
         });
 
     } catch (error) {
-        console.error("Erro no controller register:", error)
-
         return res.status(500).json({
             errorMessage: "Ocorreu um erro. Tente novamente mais tarde.",
         });

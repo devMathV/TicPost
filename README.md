@@ -1,59 +1,60 @@
 # TicPost
 
-TicPost is a full-stack social network application developed to practice and apply concepts of modern web development across the frontend, backend, authentication, database, and API layers.
+**A full-stack social network built with React, Node.js, Express, Prisma, and MongoDB.**
 
-The platform allows users to create and manage posts, customize their profiles, and interact with the application through a responsive interface designed for both desktop and mobile devices.
+[**Live Demo**](https://devmathv.github.io/TicPost/) · [Source Code](https://github.com/devMathV/TicPost)
+
+TicPost is a social network project focused on building a complete web application, from the user interface to the backend and database. It provides a space for users to create posts, manage their profiles, and share content through a responsive interface.
 
 ## Features
 
-* User registration with email verification
-* Automatic login after email confirmation
-* Secure authentication using JWT stored in HttpOnly cookies
-* Login and logout
-* User profiles with avatar and biography
-* Profile editing
-* Create, edit, and delete posts
-* Server-side ownership validation for posts
-* Paginated post loading
-* Responsive navigation for desktop and mobile
-* Password hashing with bcrypt
-* Email delivery through Nodemailer
-* Profile image hosting through Cloudinary
-* Request rate limiting for post creation
+- **Account management:** Registration, email verification, login, and logout.
+- **Authentication:** JWT-based authentication using HttpOnly cookies.
+- **User profiles:** Profile information, avatar, and biography management.
+- **Post management:** Create, edit, and delete posts.
+- **Access control:** Server-side validation to ensure users can only modify their own posts.
+- **Pagination:** Posts are loaded in pages instead of requesting the entire collection at once.
+- **Responsive interface:** Navigation and layouts adapted for desktop and mobile devices.
+- **Email verification:** Registration codes sent through Resend.
+- **Image hosting:** Profile images managed through Cloudinary.
+- **Request rate limiting:** Limits on post creation to help prevent abuse.
 
-## Technologies
+## Tech Stack
 
 ### Frontend
 
-* React
-* Vite
-* React Router
-* Axios
-* CSS
-* React Icons
+- React
+- Vite
+- React Router
+- Axios
+- CSS
+- React Icons
 
 ### Backend
 
-* Node.js
-* Express
-* Prisma
-* MongoDB
-* JWT
-* bcryptjs
-* Nodemailer
-* express-rate-limit
+- Node.js
+- Express
+- Prisma ORM
+- MongoDB
+- JSON Web Tokens (JWT)
+- bcryptjs
+- express-rate-limit
+- Resend SDK
 
 ### External Services
 
-* MongoDB Atlas
-* Cloudinary
-* Nodemailer
+- **MongoDB Atlas:** Database hosting.
+- **Cloudinary:** Image hosting and management.
+- **Resend:** Transactional email delivery.
+- **GitHub Pages:** Frontend hosting.
+- **Render:** Backend hosting.
 
 ## Project Structure
 
 ```text
 TicPost/
 ├── backend/
+│   ├── prisma/
 │   ├── src/
 │   │   ├── config/
 │   │   ├── controllers/
@@ -61,8 +62,7 @@ TicPost/
 │   │   ├── middlewares/
 │   │   ├── services/
 │   │   └── server.js
-│   ├── prisma/
-│   └── ...
+│   └── package.json
 │
 ├── frontend/
 │   ├── src/
@@ -71,35 +71,33 @@ TicPost/
 │   │   ├── context/
 │   │   ├── hooks/
 │   │   ├── pages/
-│   │   ├── routes
-│   │   ├── services
-│   │   └── ...
-│   └── ...
+│   │   ├── routes/
+│   │   └── services/
+│   └── package.json
 │
+├── .github/
+│   └── workflows/
+├── .gitignore
 └── README.md
 ```
 
-The frontend and backend are maintained in separate directories within the same repository.
+The frontend and backend share one repository but are deployed independently.
 
-## Authentication
+## Authentication and Security
 
-TicPost uses JWT-based authentication with the token stored in an HttpOnly cookie, preventing direct access to the token from client-side JavaScript.
+TicPost uses JWTs stored in HttpOnly cookies, preventing client-side JavaScript from directly reading the authentication token. Passwords are hashed with bcryptjs before being stored.
 
-User passwords are hashed with bcrypt before being stored.
+Registration requires email verification before a user account is created. Verification codes are stored as hashes and have an expiration time.
 
-During registration, the user receives a verification code by email. The account is only created after the code is successfully verified.
-
-Protected API routes use authentication middleware to validate the token and identify the authenticated user through `req.userId`.
-
-## Data and API
-
-The backend provides a REST API built with Express, with Prisma handling communication with MongoDB.
-
-Operations involving user-owned content are validated on the server. For example, a user cannot edit or delete a post belonging to another account simply by modifying the request sent from the frontend.
-
-Posts are also loaded using pagination to avoid requesting the entire collection at once.
+Protected operations use authentication middleware, while ownership checks are performed on the server rather than relying on information supplied by the frontend.
 
 ## Running Locally
+
+### Prerequisites
+
+- Node.js and npm
+- A MongoDB database
+- Credentials for the external services used by the application
 
 ### 1. Clone the repository
 
@@ -108,89 +106,97 @@ git clone https://github.com/devMathV/TicPost.git
 cd TicPost
 ```
 
-### 2. Install dependencies
-
-Backend:
+### 2. Install backend dependencies
 
 ```bash
 cd backend
 npm install
 ```
 
-Frontend:
+### 3. Configure backend environment variables
 
-```bash
-cd ../frontend
-npm install
-```
-
-### 3. Configure environment variables
-
-Create a `.env` file inside the `backend` directory:
+Create a `.env` file inside `backend/`:
 
 ```env
 DATABASE_URL=
 JWT_SECRET=
 JWT_EXPIRES_IN=
 FRONTEND_URL=
+
+RESEND_API_KEY=
+RESEND_FROM_EMAIL=
+
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
-CLOUDINARY_URL=
-GMAIL_USER=
-GMAIL_APP_PASSWORD=
 ```
 
-Configure the frontend environment variables according to the API URL used by the application.
-
-Do not commit `.env` files or other credentials to the repository.
+Fill in the values required by your environment. Never commit this file or expose API keys, database credentials, or JWT secrets.
 
 ### 4. Generate Prisma Client
 
-Inside the backend directory:
+From the `backend/` directory, run:
 
 ```bash
 npx prisma generate
 ```
 
+If you are setting up a new database, synchronize its schema according to the project's Prisma configuration before starting the application.
+
 ### 5. Start the backend
 
 ```bash
-npm run dev
+npm run server
 ```
 
-### 6. Start the frontend
+### 6. Configure and start the frontend
 
-Inside the frontend directory:
+Open another terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env` file inside `frontend/`:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+Start Vite:
 
 ```bash
 npm run dev
 ```
 
-## What This Project Demonstrates
+Open the local URL displayed by Vite in your terminal.
 
-TicPost was built as a practical full-stack project, with a focus on understanding how different parts of a web application work together.
+## Deployment
 
-The project demonstrates:
+The application uses separate hosting services for the frontend and backend.
 
-* Component-based frontend development with React
-* Client-side routing
-* REST API development
-* Authentication and authorization
-* HttpOnly cookie-based JWT authentication
-* Database modeling with Prisma
-* MongoDB integration
-* Input and API validation
-* Middleware architecture
-* Pagination
-* Responsive interface development
-* Integration with external services
-* Basic API abuse prevention through rate limiting
+- The frontend is built with Vite and deployed to GitHub Pages through GitHub Actions.
+- The backend runs on Render.
+- MongoDB Atlas provides the database.
+- Resend handles transactional emails using the verified `mail.ticpost.com.br` sending domain.
+- Cloudinary manages profile images.
 
-## Repository
+Production environment variables must be configured in the relevant hosting dashboards. The frontend build uses `VITE_API_URL` to identify the deployed backend API.
 
-GitHub: https://github.com/devMathV/TicPost
+## Project Goals
+
+TicPost is a practical full-stack development project built to strengthen my understanding of:
+
+- React component architecture and client-side routing.
+- REST API design and backend organization.
+- Authentication, authorization, and secure cookie handling.
+- Database modeling with Prisma and MongoDB.
+- Form validation and error handling.
+- Pagination and responsive interface design.
+- Integration with external services.
+- Deployment and environment configuration.
 
 ## Status
 
-TicPost is currently under development. New features, improvements, and deployment configurations are being implemented progressively.
+TicPost is an ongoing personal project. Its implementation and deployment are being refined as new features and improvements are introduced.

@@ -11,6 +11,8 @@ const PostCreator = () => {
 
     const [postText, setPostText] = useState("")
 
+    const [isPosting, setIsPosting] = useState(false)
+
     const { createNewPost } = usePostsDB()
 
     const handleChange = (e) => {
@@ -28,9 +30,13 @@ const PostCreator = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        setIsPosting(true)
+
         const hasPostCreated = await createNewPost(postText)
 
         if (hasPostCreated) setPostText("")
+
+        setIsPosting(false)
     }
 
     return (
@@ -46,7 +52,11 @@ const PostCreator = () => {
                     onChange={handleChange}
                     maxLength={500}
                 ></textarea>
-                <button type='submit' className='post-creator-submit'>Postar</button>
+                <button 
+                    type='submit' 
+                    className='post-creator-submit'
+                    disabled={isPosting}
+                >Postar</button>
             </form>
         </div>
     )

@@ -60,3 +60,12 @@
 .confirm-dialog-actions .confirm-button:hover {
     opacity: .8;
 }
+
+.confirm-dialog-actions button:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+.confirm-dialog-actions button:disabled:hover {
+    opacity: 1;
+}

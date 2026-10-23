@@ -11,3 +11,9 @@ h3 {
     color: #656565;
     border-bottom: 1px solid #00000055;
 }
+
+@media screen and (max-width: 500px) {
+    .profile {
+        padding-bottom: var(--mobile-nav-height);
+    }
+}

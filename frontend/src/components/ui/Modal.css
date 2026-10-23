@@ -111,3 +111,13 @@
 .post-button:hover {
     opacity: .8;
 }
+
+button:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background-color: #eee;
+    opacity: 1;
+}

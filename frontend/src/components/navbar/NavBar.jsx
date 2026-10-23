@@ -77,8 +77,8 @@ const NavBar = () => {
                     {!isNavProfileOptionsHidden && (
                         <div className="nav-profile-options-container" onClick={() => setIsNavProfileOptionsHidden(true)}>
                             {width >= 500 && (
-                                <div className="nav-profile-option">
-                                    <NavLink to={"/profile"}>Ver Perfil</NavLink>
+                                <div className="nav-profile-option" onClick={() => navigate("/profile")}>
+                                    <p>Ver Perfil</p>
                                 </div>
                             )}
                             <div className="nav-profile-option" onClick={() => setIsConfirmOpen(true)}>

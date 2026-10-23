@@ -12,13 +12,18 @@ const PostCreatorModal = ({ setIsCreatorModalOpen }) => {
 
     const [postText, setPostText] = useState("")
     const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+    const [isPosting, setIsPosting] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        setIsPosting(true)
+
         const hasPostCreated = await createNewPost(postText)
 
         if (hasPostCreated) setIsCreatorModalOpen(false)
+
+        setIsPosting(false)
     }
 
     const cancelAction = () => {
@@ -53,6 +58,7 @@ const PostCreatorModal = ({ setIsCreatorModalOpen }) => {
                     <button
                         className='post-button'
                         onClick={handleSubmit}
+                        disabled={isPosting}
                     >
                         Postar
                     </button>

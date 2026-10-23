@@ -73,9 +73,6 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  {
-    basename: import.meta.env.PROD ? "/TicPost" : "/"
-  }
 );
 
 createRoot(document.getElementById('root')).render(
